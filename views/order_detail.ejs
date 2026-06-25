@@ -1,0 +1,60 @@
+<section class="page-banner">
+  <div class="container">
+    <h1>订单详情</h1>
+    <p>订单号：<%= order.order_no %></p>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="order-detail-card">
+      <div class="order-detail-header">
+        <span>订单状态：<strong><% if (order.status === 'pending') { %>待处理<% } else if (order.status === 'confirmed') { %>已确认<% } else if (order.status === 'shipped') { %>已发货<% } else if (order.status === 'completed') { %>已完成<% } %></strong></span>
+        <span>下单时间：<%= order.created_at %></span>
+      </div>
+      <div class="order-detail-body">
+        <h3>收货信息</h3>
+        <p>收货人：<%= order.recipient %></p>
+        <p>电话：<%= order.phone %></p>
+        <p>地址：<%= order.address %></p>
+        <% if (order.note) { %><p>备注：<%= order.note %></p><% } %>
+      </div>
+
+      <div class="order-detail-payment" style="margin:20px 0;padding:20px;background:#FFF8E7;border:1px solid #D4A017;border-radius:8px;">
+        <h3 style="margin-bottom:12px;color:#B22222;">付款信息</h3>
+        <% if (order.payment_status === 'paid') { %>
+          <div class="form-success">已付款</div>
+        <% } else { %>
+          <p style="margin-bottom:8px;font-size:0.9rem;color:#555;">请通过以下方式完成付款，付款后点击"我已付款"通知我们：</p>
+          <div style="padding:12px;background:#FFF;border-radius:4px;margin-bottom:12px;">
+            <p><strong>银行转账</strong></p>
+            <p>开户行：中国农业银行 XX 支行</p>
+            <p>户名：特色蛋品行</p>
+            <p>账号：6228 4800 1234 5678</p>
+            <p style="margin-top:8px;"><strong>微信转账</strong></p>
+            <p>微信号：特色蛋品行</p>
+          </div>
+          <form action="/orders/<%= order.id %>/pay" method="POST">
+            <button type="submit" class="btn btn-primary">我已付款</button>
+          </form>
+          <p style="margin-top:8px;font-size:0.8rem;color:#999;">付款后点击此按钮，我们核实后尽快为您发货</p>
+        <% } %>
+      </div>
+
+      <div class="order-detail-items">
+        <h3>商品清单</h3>
+        <table class="cart-table">
+          <thead><tr><th>产品</th><th>单价</th><th>数量</th><th>小计</th></tr></thead>
+          <tbody>
+            <% items.forEach(function(item) { %>
+            <tr><td><%= item.product_name %></td><td>&yen;<%= item.price.toFixed(1) %>/<%= item.unit %></td><td><%= item.quantity %></td><td>&yen;<%= item.subtotal.toFixed(1) %></td></tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+      <div class="order-detail-total">合计：<strong>&yen;<%= order.total.toFixed(1) %></strong></div>
+      <div class="order-detail-footer">
+        <a href="/orders" class="btn btn-outline">返回订单列表</a>
+      </div>
+    </div>
+  </div>
+</section>
