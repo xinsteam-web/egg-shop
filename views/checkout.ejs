@@ -1,0 +1,45 @@
+<section class="page-banner">
+  <div class="container">
+    <h1>结算</h1>
+    <p>确认订单信息</p>
+  </div>
+</section>
+<section class="checkout-section section">
+  <div class="container">
+    <div class="checkout-layout">
+      <div class="checkout-form">
+        <% if (error) { %><div class="form-error"><%= error %></div><% } %>
+        <form action="/orders/checkout" method="POST">
+          <h3>收货信息</h3>
+          <div class="form-group">
+            <label>收货人 *</label>
+            <input type="text" name="recipient" value="<%= user.contact %>" required class="form-input">
+          </div>
+          <div class="form-group">
+            <label>联系电话 *</label>
+            <input type="tel" name="phone" value="<%= user.phone %>" required class="form-input">
+          </div>
+          <div class="form-group">
+            <label>收货地址 *</label>
+            <input type="text" name="address" required class="form-input" placeholder="请填写详细地址">
+          </div>
+          <div class="form-group">
+            <label>备注</label>
+            <textarea name="note" class="form-input form-textarea" rows="3" placeholder="如有特殊要求请备注"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg btn-block">提交订单</button>
+        </form>
+      </div>
+      <div class="checkout-summary">
+        <h3>订单摘要</h3>
+        <table class="summary-table">
+          <% cart.forEach(function(item) { %>
+          <tr><td><%= item.name %></td><td>x <%= item.quantity %></td><td>&yen;<%= (item.price * item.quantity).toFixed(1) %></td></tr>
+          <% }); %>
+        </table>
+        <div class="summary-total">合计：<strong>&yen;<%= total.toFixed(1) %></strong></div>
+        <p class="summary-note">提交后我们将尽快与您确认订单</p>
+      </div>
+    </div>
+  </div>
+</section>
