@@ -1,0 +1,53 @@
+<section class="page-banner">
+  <div class="container">
+    <h1><%= product.name %></h1>
+    <p><a href="/products">产品中心</a> / <a href="/products?category=<%= product.category_slug %>"><%= product.category_name %></a> / <%= product.name %></p>
+  </div>
+</section>
+<section class="product-detail section">
+  <div class="container">
+    <div class="detail-layout">
+      <div class="detail-image">
+        <div class="product-placeholder large"><%= product.name.charAt(0) %></div>
+      </div>
+      <div class="detail-info">
+        <h2><%= product.name %></h2>
+        <span class="product-category"><%= product.category_name %></span>
+        <p class="detail-desc"><%= product.description %></p>
+        <div class="detail-specs">
+          <div class="spec-row"><span class="spec-label">规格</span><span class="spec-value"><%= product.spec %></span></div>
+          <div class="spec-row"><span class="spec-label">产地</span><span class="spec-value"><%= product.origin %></span></div>
+          <div class="spec-row"><span class="spec-label">包装</span><span class="spec-value"><%= product.packaging %></span></div>
+          <div class="spec-row"><span class="spec-label">起订量</span><span class="spec-value"><%= product.min_order %> <%= product.unit %></span></div>
+        </div>
+        <div class="detail-price-row">
+          <span class="detail-price">&yen;<%= product.price.toFixed(1) %></span>
+          <span class="detail-unit">/ <%= product.unit %></span>
+        </div>
+        <form action="/orders/cart/add" method="POST" class="add-cart-form">
+          <input type="hidden" name="product_id" value="<%= product.id %>">
+          <input type="hidden" name="name" value="<%= product.name %>">
+          <input type="hidden" name="price" value="<%= product.price %>">
+          <input type="hidden" name="unit" value="<%= product.unit %>">
+          <div class="qty-selector">
+            <label>数量：</label>
+            <input type="number" name="quantity" value="<%= product.min_order %>" min="<%= product.min_order %>" class="qty-input">
+            <span><%= product.unit %></span>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg">加入购物车</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">产品描述</h2>
+    <div class="detail-article">
+      <p><%= product.description %></p>
+      <p>本产品每日新鲜采收，严格分选包装，确保品质。<%= product.origin %>直接供应，从源头到餐桌，新鲜有保障。适合餐饮烹饪、烘焙加工、家庭食用等多种用途。</p>
+      <p><strong>配送说明：</strong>每天上午完成采收，下午统一发货。省内次日达，省外2-3天。冷链配送，保证新鲜。</p>
+      <p><strong>售后承诺：</strong>如收到产品有破损或质量问题，请及时拍照联系客服，我们将第一时间为您处理。</p>
+    </div>
+  </div>
+</section>
