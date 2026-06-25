@@ -1,0 +1,26 @@
+<section class="page-banner">
+  <div class="container">
+    <h1>登录</h1>
+    <p>登录批发客户账号</p>
+  </div>
+</section>
+<section class="form-page section">
+  <div class="container">
+    <div class="form-card">
+      <% if (registered) { %><div class="form-success">注册成功！请登录</div><% } %>
+      <% if (error) { %><div class="form-error"><%= error %></div><% } %>
+      <form action="/login" method="POST">
+        <div class="form-group">
+          <label>用户名</label>
+          <input type="text" name="username" required class="form-input" placeholder="请输入用户名">
+        </div>
+        <div class="form-group">
+          <label>密码</label>
+          <input type="password" name="password" required class="form-input" placeholder="请输入密码">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">登录</button>
+      </form>
+      <p class="form-footer">还没有账号？<a href="/register">立即注册</a></p>
+    </div>
+  </div>
+</section>
