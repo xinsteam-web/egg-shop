@@ -1,0 +1,48 @@
+<section class="page-banner">
+  <div class="container">
+    <h1>产品中心</h1>
+    <p>精选特色蛋品 · 批发供应</p>
+  </div>
+</section>
+<section class="products-page section">
+  <div class="container">
+    <div class="products-layout">
+      <aside class="filter-sidebar">
+        <h3>产品分类</h3>
+        <ul class="filter-list">
+          <li><a href="/products" class="<%= selectedCategory === '' ? 'active' : '' %>">全部产品</a></li>
+          <% categories.forEach(function(c) { %>
+          <li><a href="/products?category=<%= c.slug %>" class="<%= selectedCategory === c.slug ? 'active' : '' %>"><%= c.name %></a></li>
+          <% }); %>
+        </ul>
+      </aside>
+      <div class="products-content">
+        <% if (products.length === 0) { %>
+        <div class="empty-state">
+          <p>暂无产品</p>
+        </div>
+        <% } else { %>
+        <div class="products-grid">
+          <% products.forEach(function(p) { %>
+          <div class="product-card">
+            <div class="product-image">
+              <div class="product-placeholder"><%= p.name.charAt(0) %></div>
+            </div>
+            <div class="product-info">
+              <span class="product-category"><%= p.category_name %></span>
+              <h3 class="product-name"><%= p.name %></h3>
+              <p class="product-desc"><%= p.description.length > 20 ? p.description.substring(0, 20) + '...' : p.description %></p>
+              <div class="product-meta">
+                <span class="product-price">&#xffe5;<%= p.price.toFixed(1) %></span>
+                <span class="product-unit">/ <%= p.unit %></span>
+              </div>
+              <a href="/products/<%= p.slug %>" class="btn btn-sm">查看详情</a>
+            </div>
+          </div>
+          <% }); %>
+        </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</section>
