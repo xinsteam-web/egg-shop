@@ -1,0 +1,6 @@
+node_modules/
+node-dist/
+*.txt
+*.bat
+data.db
+.npm-cache/
