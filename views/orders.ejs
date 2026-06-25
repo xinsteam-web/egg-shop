@@ -1,0 +1,37 @@
+<section class="page-banner">
+  <div class="container">
+    <h1>我的订单</h1>
+    <p>查看订单记录</p>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <% if (orders.length === 0) { %>
+    <div class="empty-state">
+      <p>暂无订单</p>
+      <a href="/products" class="btn btn-primary">去选购产品</a>
+    </div>
+    <% } else { %>
+    <div class="orders-list">
+      <% orders.forEach(function(order) { %>
+      <div class="order-card">
+        <div class="order-header">
+          <span class="order-no">订单号：<%= order.order_no %></span>
+          <span class="order-status order-status-<%= order.status %>">
+            <% if (order.status === 'pending') { %>待处理<% } else if (order.status === 'confirmed') { %>已确认<% } else if (order.status === 'shipped') { %>已发货<% } else if (order.status === 'completed') { %>已完成<% } %>
+          </span>
+        </div>
+        <div class="order-body">
+          <p>下单时间：<%= order.created_at %></p>
+          <p>金额：&yen;<%= order.total.toFixed(1) %></p>
+          <p>商品数：<%= order.item_count %> 种</p>
+        </div>
+        <div class="order-footer">
+          <a href="/orders/<%= order.id %>" class="btn btn-sm">查看详情</a>
+        </div>
+      </div>
+      <% }); %>
+    </div>
+    <% } %>
+  </div>
+</section>
