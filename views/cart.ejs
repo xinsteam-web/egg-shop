@@ -1,0 +1,47 @@
+<section class="page-banner">
+  <div class="container">
+    <h1>购物车</h1>
+    <p>查看已选产品</p>
+  </div>
+</section>
+<section class="cart-section section">
+  <div class="container">
+    <% if (cart.length === 0) { %>
+    <div class="empty-state">
+      <p>购物车为空</p>
+      <a href="/products" class="btn btn-primary">去选购产品</a>
+    </div>
+    <% } else { %>
+    <table class="cart-table">
+      <thead>
+        <tr><th>产品</th><th>单价</th><th>数量</th><th>小计</th><th>操作</th></tr>
+      </thead>
+      <tbody>
+        <% cart.forEach(function(item) { %>
+        <tr>
+          <td><%= item.name %></td>
+          <td>&yen;<%= item.price.toFixed(1) %>/<%= item.unit %></td>
+          <td>
+            <form action="/orders/cart/update" method="POST" class="qty-form">
+              <input type="hidden" name="product_id" value="<%= item.product_id %>">
+              <input type="number" name="quantity" value="<%= item.quantity %>" min="1" class="qty-input-sm" onchange="this.form.submit()">
+            </form>
+          </td>
+          <td>&yen;<%= (item.price * item.quantity).toFixed(1) %></td>
+          <td>
+            <form action="/orders/cart/remove" method="POST">
+              <input type="hidden" name="product_id" value="<%= item.product_id %>">
+              <button type="submit" class="btn btn-danger btn-sm">删除</button>
+            </form>
+          </td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+    <div class="cart-summary">
+      <span class="cart-total">合计：<strong>&yen;<%= total.toFixed(1) %></strong></span>
+      <a href="/orders/checkout" class="btn btn-primary btn-lg">去结算</a>
+    </div>
+    <% } %>
+  </div>
+</section>
