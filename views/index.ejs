@@ -1,0 +1,118 @@
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <h1 class="hero-title">特色蛋品行</h1>
+      <p class="hero-subtitle">专注鹌鹑蛋 · 鸽蛋 · 鸭蛋 · 鹅蛋</p>
+      <p class="hero-desc">自有养殖基地 · 每日新鲜出品 · 品质保证 · 批发零售</p>
+      <div class="hero-actions">
+        <a href="/products" class="btn btn-primary">查看产品</a>
+        <a href="/contact" class="btn btn-outline">联系我们</a>
+      </div>
+    </div>
+    <div class="hero-seal">
+      <div class="seal-ring">
+        <div class="seal-text">品质保证</div>
+        <div class="seal-inner">鲜</div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="features section">
+  <div class="container">
+    <h2 class="section-title">为什么选择我们</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">&#x1f413;</div>
+        <h3>自有养殖基地</h3>
+        <p>多年养殖经验，自有鹌鹑、鸽子、鸭、鹅等养殖基地，源头直供，品质可控</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#x1f4e6;</div>
+        <h3>每日新鲜配送</h3>
+        <p>当天采收、当天发货，全程冷链配送，保证每一枚蛋的新鲜度</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#x2705;</div>
+        <h3>品质严格把关</h3>
+        <p>每批次抽检，规格分选，确保颗粒均匀、外壳洁净、品质上乘</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#x1f4bc;</div>
+        <h3>批零兼营</h3>
+        <p>餐饮、食堂、商超批量供应，也支持零售体验，灵活合作</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="categories section">
+  <div class="container">
+    <h2 class="section-title">产品品类</h2>
+    <div class="categories-grid">
+      <% categories.forEach(function(cat) { %>
+      <a href="/products?category=<%= cat.slug %>" class="category-card">
+        <div class="category-badge"><%= cat.name %></div>
+        <h3><%= cat.name %></h3>
+        <p><%= cat.description %></p>
+        <span class="category-link">查看详情 &#8594;</span>
+      </a>
+      <% }); %>
+    </div>
+  </div>
+</section>
+<section class="featured section">
+  <div class="container">
+    <h2 class="section-title">热销产品</h2>
+    <div class="products-grid">
+      <% featured.forEach(function(p) { %>
+      <div class="product-card">
+        <div class="product-image">
+          <div class="product-placeholder"><%= p.name.charAt(0) %></div>
+        </div>
+        <div class="product-info">
+          <span class="product-category"><%= p.category_name %></span>
+          <h3 class="product-name"><%= p.name %></h3>
+          <p class="product-desc"><%= p.description.length > 20 ? p.description.substring(0, 20) + '...' : p.description %></p>
+          <div class="product-meta">
+            <span class="product-price">&#xffe5;<%= p.price.toFixed(1) %></span>
+            <span class="product-unit">/ <%= p.unit %></span>
+          </div>
+          <a href="/products/<%= p.slug %>" class="btn btn-sm">查看详情</a>
+        </div>
+      </div>
+      <% }); %>
+    </div>
+  </div>
+</section>
+<section class="trust section">
+  <div class="container">
+    <div class="trust-content">
+      <h2 class="section-title">诚信经营 · 口碑相传</h2>
+      <div class="trust-stats">
+        <div class="stat">
+          <span class="stat-number">10+</span>
+          <span class="stat-label">年行业经验</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">50+</span>
+          <span class="stat-label">合作餐饮企业</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">100+</span>
+          <span class="stat-label">长期合作伙伴</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">500+</span>
+          <span class="stat-label">日均供应量</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="cta section">
+  <div class="container">
+    <h2>欢迎咨询合作</h2>
+    <p>如需大量采购或长期合作，欢迎来电或到访考察</p>
+    <p class="cta-phone">联系电话：400-888-8888</p>
+    <a href="/contact" class="btn btn-primary btn-lg">联系我们</a>
+  </div>
+</section>
