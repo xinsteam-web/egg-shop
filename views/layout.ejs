@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= typeof title !== 'undefined' ? title + ' - ' : '' %>特色蛋品行</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-top">
+      <div class="container">
+        <span class="header-slogan">专注特色蛋品批发 · 新鲜直达 · 品质保证</span>
+        <div class="header-links">
+          <% if (user) { %>
+            <span class="header-user"><%= user.company %>，欢迎您</span>
+            <a href="/orders" class="header-link">我的订单</a>
+            <a href="/password" class="header-link">修改密码</a>
+            <% if (user && user.is_admin) { %><a href="/admin" class="header-link">管理后台</a><% } %>
+            <a href="/logout" class="header-link">退出登录</a>
+          <% } else { %>
+            <a href="/login" class="header-link">登录</a>
+            <a href="/register" class="header-link">注册</a>
+          <% } %>
+          <a href="/orders/cart" class="header-link cart-link">
+            <span class="cart-icon">&#xb7;</span>
+            购物车<% if (cartCount > 0) { %><span class="cart-badge"><%= cartCount %></span><% } %>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="header-main">
+      <div class="container">
+        <a href="/" class="logo">
+          <span class="logo-icon">&#x25cf;</span>
+          <span class="logo-text">
+            <span class="logo-title">特色蛋品行</span>
+            <span class="logo-sub">Premium Egg Supply</span>
+          </span>
+        </a>
+        <nav class="nav">
+          <a href="/" class="nav-link">首页</a>
+          <a href="/products" class="nav-link">产品中心</a>
+          <a href="/about" class="nav-link">关于我们</a>
+          <a href="/contact" class="nav-link">联系我们</a>
+          <% if (user && user.is_admin) { %>
+          <a href="/admin" class="nav-link">管理后台</a>
+          <% } %>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <%- body %>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4 class="footer-title">特色蛋品行</h4>
+          <p class="footer-text">专注鹌鹑蛋、鸽蛋、鸭蛋、鹅蛋等特色蛋品批发<br>品质为本，诚信经营</p>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-title">快速链接</h4>
+          <a href="/products" class="footer-link">产品中心</a>
+          <a href="/products?category=quail-egg" class="footer-link">鹌鹑蛋</a>
+          <a href="/products?category=pigeon-egg" class="footer-link">鸽蛋</a>
+          <a href="/products?category=duck-egg" class="footer-link">鸭蛋</a>
+          <a href="/products?category=goose-egg" class="footer-link">鹅蛋</a>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-title">联系我们</h4>
+          <p class="footer-text">电话：400-888-8888</p>
+          <p class="footer-text">手机：138-0000-0000</p>
+          <p class="footer-text">微信：特色蛋品行</p>
+          <p class="footer-text">地址：中国优质农产品供应基地</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 特色蛋品行 版权所有 | 专注特色蛋品批发供应</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/cart.js"></script>
+</body>
+</html>
