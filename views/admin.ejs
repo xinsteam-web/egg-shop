@@ -1,0 +1,64 @@
+<section class="page-banner">
+  <div class="container">
+    <h1>管理后台</h1>
+    <p>订单管理 · 配送处理</p>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="trust-stats" style="margin-bottom: 30px;">
+      <div class="stat">
+        <span class="stat-number" style="color:#B22222;"><%= stats.pending %></span>
+        <span class="stat-label">待处理</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number" style="color:#D4A017;"><%= stats.confirmed %></span>
+        <span class="stat-label">已确认</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number" style="color:#1565C0;"><%= stats.shipped %></span>
+        <span class="stat-label">配送中</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number" style="color:#2E7D32;"><%= stats.completed %></span>
+        <span class="stat-label">已完成</span>
+      </div>
+    </div>
+
+    <% if (orders.length === 0) { %>
+    <div class="empty-state"><p>暂无订单</p></div>
+    <% } else { %>
+    <div class="orders-list">
+      <% orders.forEach(function(order) { %>
+      <div class="order-card">
+        <div class="order-header">
+          <span class="order-no">订单号：<%= order.order_no %></span>
+          <span class="order-status order-status-<%= order.status %>">
+            <% if (order.status === 'pending') { %>待处理<% } else if (order.status === 'confirmed') { %>已确认<% } else if (order.status === 'shipped') { %>配送中<% } else if (order.status === 'completed') { %>已完成<% } %>
+          </span>
+        </div>
+        <div class="order-body">
+          <p>客户：<%= order.user_company %>（<%= order.user_contact %>）| 付款：<% if (order.payment_status === 'paid') { %><span style="color:#2E7D32;font-weight:500;">已付款</span><% } else { %><span style="color:#E65100;">未付款</span><% } %></p>
+          <p>金额：&yen;<%= order.total.toFixed(1) %> | 商品：<%= order.item_count %> 种</p>
+          <p>时间：<%= order.created_at %></p>
+          <p>收货：<%= order.recipient %> | <%= order.phone %> | <%= order.address %></p>
+          <% if (order.note) { %><p>备注：<%= order.note %></p><% } %>
+        </div>
+        <div class="order-footer">
+          <form action="/admin/order/<%= order.id %>/status" method="POST" style="display:flex;gap:8px;align-items:center;">
+            <label style="font-size:0.85rem;color:#555;">更新状态：</label>
+            <select name="status" class="form-input" style="width:auto;padding:4px 10px;">
+              <option value="pending" <%= order.status === 'pending' ? 'selected' : '' %>>待处理</option>
+              <option value="confirmed" <%= order.status === 'confirmed' ? 'selected' : '' %>>已确认</option>
+              <option value="shipped" <%= order.status === 'shipped' ? 'selected' : '' %>>配送中</option>
+              <option value="completed" <%= order.status === 'completed' ? 'selected' : '' %>>已完成</option>
+            </select>
+            <button type="submit" class="btn btn-sm btn-primary">更新</button>
+          </form>
+        </div>
+      </div>
+      <% }); %>
+    </div>
+    <% } %>
+  </div>
+</section>
